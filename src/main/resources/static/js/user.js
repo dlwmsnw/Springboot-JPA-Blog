@@ -14,7 +14,9 @@ let index = {
 		}
 
 		//console.log(data);
-		//ajax 호출시 default가 비동기 호출
+		// ajax호출시 default가 비동기 호출
+		// ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert 요청!!
+		// ajax가 통신을 성공하고 서버가 json을 리턴해주면 자동으로 자바 오브젝트로 변환해주네요.
 		// 회원가입 수행 요청 (100초 가정)
 		$.ajax({
 			type: "POST",
@@ -24,12 +26,12 @@ let index = {
 			dataType: "json" // 요청을 서버로해서 응답이 왔을 때 기본적으로 모든 것이 문자열 (생긴 게 json이라면) => javascript오브젝트로 변경
 		}).done(function(resp) {
 			alert("회원가입이 완료되었습니다.");
-			console.log(resp);
-			alert(resp);
+			//console.log(resp);
+			//alert(resp);
 			location.href = "/blog";
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
-		}); // ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert 요청!!
+		});
 
 	},
 }

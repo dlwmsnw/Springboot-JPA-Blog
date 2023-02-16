@@ -3,11 +3,15 @@ package com.cos.blog.test;
 import java.util.List;
 import java.util.function.Supplier;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,15 +46,41 @@ public class DummyControllerTest {
 		return users;
 	}
 	
+	
+	//save 함수는 id를 전달하지 않으면 insert를 해 주고,
+	//save 함수는 id를 전달하면 해당 id에 대한 데이터가 있으면 update를 해 주고,
+	//save 함수는 id를 전달하면 해당 id에 대한 데이터가 없으면 insert를 한다.
 	// email, password
 	//http://localhost:8000/blog/dummy/user/1
+	
+	@DeleteMapping("/dummy/user/{id}")
+	public String delete(@PathVariable int id) {
+		try {
+			userRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			return "삭제에 실패하였습니다. 해당 id는 DB에 없습니다.";
+		}
+		
+		return "삭제되었습니다. id : "+id;
+	}
+	
+	@Transactional
 	@PutMapping("/dummy/user/{id}")
-	public User updateUser(@PathVariable int id, @RequestBody User requestUser) {
+	public User updateUser(@PathVariable int id, @RequestBody User requestUser) { // json 데이터 요청 -> Java Object(Message Converter의 Jackson 라이브러리리가 변환해서 받아줌.
 		System.out.println("id : "+id);
 		System.out.println("password : "+requestUser.getPassword());
 		System.out.println("email : "+requestUser.getEmail());
 		
-		return null;
+		//아래 user는 실제 DB에서 받은 user
+		User user = userRepository.findById(id).orElseThrow(()->{
+			return new IllegalArgumentException("수정에 실패하였습니다.");
+		});
+		user.setPassword(requestUser.getPassword());
+		user.setEmail(requestUser.getEmail());
+		
+		//userRepository.save(user); 
+		
+		return user;
 	}
 	
 	// {id} 주소로 파마레터를 전달 받을 수 있음.
@@ -59,7 +89,14 @@ public class DummyControllerTest {
 	public User detail(@PathVariable int id) {
 		// user/3을 찾으면 내가 데이터베이스에서 못 찾아오게 되면 user가 null이 될 거 아냐?
 		// 그럼 return null이 리턴이 되잖아. 그럼 프로그램에 문제가 생겨.
-		// Optional로 너의 User 객체를 감싸서 가져올 테니 null인지 아닌지 판단해서 return해
+		// Optional로 너의 User 객체를 감싸서 가져올 테니 null인지 아닌지 판단해서 return해.
+		
+		//람다식
+		/*
+		 * User user = userRepository.findById(id).orElseThrow(()->{ return new
+		 * IllegalArgumentException("해당 사용자가 없습니다."); });
+		 */
+		
 		User user = userRepository.findById(id).orElseThrow(new Supplier<IllegalArgumentException>() {
 			@Override
 			public IllegalArgumentException get() {

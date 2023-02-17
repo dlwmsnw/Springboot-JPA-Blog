@@ -17,7 +17,7 @@ import com.cos.blog.service.UserService;
 public class UserApiController {
 	
 	@Autowired
-	private UserService userService; 
+	private UserService userService;
 	
 	@PostMapping("/api/user")
 	public ResponseDto<Integer> save(@RequestBody User user) {

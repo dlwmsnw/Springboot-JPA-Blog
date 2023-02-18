@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.cos.blog.config.auth.PrincipalDetail;
 
 @Controller
-public class BoardController {
+public class BoardController { 
 	
 	
 	@GetMapping({"","/"})

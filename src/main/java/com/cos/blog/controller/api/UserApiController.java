@@ -19,8 +19,8 @@ public class UserApiController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/api/user")
-	public ResponseDto<Integer> save(@RequestBody User user) {
+	@PostMapping("/auth/joinProc")
+	public ResponseDto<Integer> save(@RequestBody User user) { // username, password, email
 		System.out.println("UserApiController : save 호출됨");
 		// 실제로 DB에 insert를 하고 아래에서 return이 되면 된다.
 		user.setRole(RoleType.USER);
@@ -28,7 +28,8 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
-	/*
+	/* 전통적인 로그인 방식.
+	 * 위에 있는 시큐리티를 이용해서 로그인을 할 것이기 때문에 주석.
 	 * @PostMapping("/api/user/login") public ResponseDto<Integer>
 	 * login(@RequestBody User user, HttpSession session){
 	 * System.out.println("UserApiController : save 호출됨"); User principal =

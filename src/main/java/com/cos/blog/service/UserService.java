@@ -19,8 +19,10 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
-	@Transactional(readOnly = true) // Select할 때 트랜잭션 시작, 서비스 종료시에 트랜잭션이 종료되는데 정합성을 유지시킬 수 있다.
-	public User 로그인(User user) {
-		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-	}
+	/*
+	 * @Transactional(readOnly = true) // Select할 때 트랜잭션 시작, 서비스 종료시에 트랜잭션이 종료되는데
+	 * 정합성을 유지시킬 수 있다. public User 로그인(User user) { return
+	 * userRepository.findByUsernameAndPassword(user.getUsername(),
+	 * user.getPassword()); }
+	 */
 }// class() end

@@ -22,7 +22,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Data  
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder //빌더 패턴!

@@ -67,7 +67,7 @@ public class UserController {
 		// HttpBody 오브젝트 생성
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "authorization_code");
-		params.add("client_id", "45c03845e338ab457debd37a46891a29");
+		params.add("client_id", "b344701c3ff69917f13cd47bb45df871");
 		params.add("redirect_uri", "http://localhost:8000/auth/kakao/callback");
 		params.add("code", code);
 		
@@ -118,6 +118,7 @@ public class UserController {
 		
 		ObjectMapper objectMapper2 = new ObjectMapper();
 		KakaoProfile kakaoProfile = null;
+		
 		try {
 			kakaoProfile = objectMapper2.readValue(response2.getBody(), KakaoProfile.class);
 		} catch (JsonMappingException e) {
@@ -162,4 +163,4 @@ public class UserController {
 	public String updateForm() {	
 	  return "user/updateForm";
 	}
-}
+}// class() end

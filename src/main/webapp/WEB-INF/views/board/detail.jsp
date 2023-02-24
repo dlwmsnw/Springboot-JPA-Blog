@@ -38,7 +38,7 @@
 		<ul id="comment-box" class="list-group">
 			<li id="comment--1" class="list-group-item d-flex justify-content-between">
 				<div>댓글 내용입니다.</div>
-				<div class="d-flex">
+				<div class="d-flex"> 
 					<div class="font-italic">작성자 : Suz &nbsp;</div>
 					<button class="badge">삭제</button>
 				</div>

@@ -1,6 +1,6 @@
 package com.cos.blog.model;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,38 +12,40 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.cos.blog.repository.ReplyRepository;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
-@Builder // 빌더 패턴!
-@Entity // User 클래스가 MySQL에 테이블이 생성된다.
+@NoArgsConstructor
+@Data
+@Entity
 public class Reply {
-
-	@Id // Primary Key
+	@Id //Primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다.
-	// 만약 오라클을 연결하면 Identity는 시퀀스를 따라간다는 것이고,
-	// MySQL을 연결하면 auto_increment을 따라간다는 뜻이다.
 	private int id; // 시퀀스, auto_increment
 
 	@Column(nullable = false, length = 200)
-	private String content; // 답변
-
-	// 누가, 어느 게시물의 답변.. 이런 것들이 필요.
+	private String content;
+	
 	@ManyToOne
-	@JoinColumn(name = "boardId")
-	// private int boardId; //보드를 누가 적었는지.
-	private Board board; // DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.
+	@JoinColumn(name="boardId")
+	private Board board;
+	
+	@ManyToOne
+	@JoinColumn(name="userId")
+	private User user;
+	
+	@CreationTimestamp
+	private LocalDateTime createDate;
 
-	@ManyToOne // Many=Board, User=One //한 명의 유저는 여러 게시글을 작성할 수 있다.
-	@JoinColumn(name = "userId")
-	// private int userId; //보드를 누가 적었는지.
-	private User user; // DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.
-
-	@CreationTimestamp //시간이 자동 입력
-	private Timestamp createDate;
+	@Override
+	public String toString() {
+		return "Reply [id=" + id + ", content=" + content + ", board=" + board + ", user=" + user + ", createDate="
+				+ createDate + "]";
+	}
 }// class() end

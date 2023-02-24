@@ -118,7 +118,6 @@ public class UserController {
 		
 		ObjectMapper objectMapper2 = new ObjectMapper();
 		KakaoProfile kakaoProfile = null;
-		
 		try {
 			kakaoProfile = objectMapper2.readValue(response2.getBody(), KakaoProfile.class);
 		} catch (JsonMappingException e) {

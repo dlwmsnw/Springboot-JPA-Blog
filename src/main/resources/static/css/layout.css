@@ -1,0 +1,79 @@
+@charset "UTF-8";
+/*layout.css*/
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  	font-size: 13px;
+    line-height: 1.8;
+    background-color: #383a59; /*Dark Purple*/
+    color: #282A36; /*Dark Grey*/
+  }
+  
+  p {font-family: Arial, Helvetica, sans-serif;
+	 font-size: 13px;}
+  .margin {margin-bottom: 45px;}
+  
+  .bg-1 { 
+    background-color: #383a59; /* Dark Purple*/
+    color: #F8F8F2; /* Light Grey */
+    font-size: 15px;
+  }
+  
+  .bg-2 { /* 소개글 */
+    background-color: #383a59; /*Dark Purple*/
+    color: #FF79C6; /* Pink */
+  }
+  
+  .bg-3 { /*본문 !!!!! -> 다크 그레이 글씨*/
+    background-color: #383a59; /*Dark Purple*/
+    color: #F8F8F2; /*Light Grey*/
+  }
+  
+  .bg-4 { /*본문 -> 회색 글씨*/
+    background-color: #383a59; /*Dark Purple*/
+    color: #F8F8F2; /* Light Gray*/
+  }
+  
+  .bg-5 { /*시계*/
+    background-color: #383a59; /*Dark Purple*/
+    color: #8BE9FD /*Bright Sky*/
+  }
+  
+  .bg-6 { /*푸터*/
+    background-color: #282A36; /*Dark Grey*/
+    color: #777777; /*Gray*/
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+  }
+  
+  .bg-7 { /*본문 -> 회색 글씨*/
+    color: #282A36; /*Dark Grey*/
+  }
+  
+  .container-fluid {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .navbar { /*상단바 배경*/
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    letter-spacing: 5px;
+    background-color: #282A36; /*Dark Grey*/
+    z-index: 1000;
+  }
+  
+  .navbar-nav  li a:hover { /*메뉴 클릭할 때 표시*/
+    color: #FF79C6 !important; /* Pink */
+  }
+  
+  .navbar-default { /*상단바 배경*/
+  	background: #282A36; /*Dark Grey*/
+  }
+ 
+  button {color: #282A36;}
